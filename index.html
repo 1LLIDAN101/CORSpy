@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        Проверка Cors в FastAPI
+    </h1>
+    <button onclick="sendRequest()"> Отправить запрос к FastAPI</button>
+    <p id="result">Результат будет тут</p>
+    
+    <script>
+        async function sendRequest() {
+            const result = document.getElementById("result")
+            try{
+                const responce = await fetch(
+                    "http://127.0.0.1:8000/app/hello"
+                );
+                const data = await responce.json();
+
+                result.textContent = JSON.stringify(data)
+                console.log("Успешный ответ:" , data);
+
+                
+            } catch(error){
+                result.textContent = "ОШИБКА CORS или сети "
+                console.error("ОШИБКА ЗАПРОСА :", error)
+            }
+        }
+    </script>
+</body>
+</html>
